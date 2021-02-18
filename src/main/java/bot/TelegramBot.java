@@ -55,7 +55,6 @@ public class TelegramBot extends TelegramLongPollingCommandBot {
             case INSERT_MONTH_DATA -> {
                 chats.updateState(chatId, BotState.MAIN);
                 try {
-                    sendMessage("Parsing " + message.getText(), chatId);
                     dataManager.insertMonthData(MonthData.parse(message.getText()));
                     sendMessage("Готово!", chatId);
                 } catch (Exception exc) {
