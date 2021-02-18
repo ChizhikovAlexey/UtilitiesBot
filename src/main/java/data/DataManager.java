@@ -7,6 +7,7 @@ import data.DataBase.Entities.Tariff;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 public class DataManager {
@@ -38,7 +39,12 @@ public class DataManager {
         return new TextReport(previousMonth, actualMonth, tariff);
     }
 
-    public void updateData(MonthData monthData) {
+    public void insertMonthData(MonthData monthData) {
         monthDataDao.insert(monthData);
     }
+
+    public void deleteDataByYearMonth(YearMonth yearMonth) {
+        monthDataDao.deleteByYearMonth(yearMonth);
+    }
+
 }

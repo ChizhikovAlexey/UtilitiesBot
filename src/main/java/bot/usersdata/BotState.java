@@ -1,5 +1,7 @@
 package bot.usersdata;
 
 public enum BotState {
-    MAIN
+    MAIN,
+    DELETE_BY_YEAR_MONTH,
+    INSERT_MONTH_DATA,
 }

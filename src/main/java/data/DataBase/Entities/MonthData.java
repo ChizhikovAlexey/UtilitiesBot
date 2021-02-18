@@ -1,6 +1,9 @@
 package data.DataBase.Entities;
 
 import java.time.LocalDate;
+import java.util.IllegalFormatException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Entity that represents meters data for a month
@@ -84,5 +87,26 @@ public class MonthData {
                 ", electricity=" + electricity +
                 ", date=" + date +
                 '}';
+    }
+
+    public static MonthData parse(String string) throws IllegalArgumentException {
+        Pattern pattern = Pattern.compile("\\s*(?<electricity>\\d+)\\s+" +
+                "(?<hotwaterbath>\\d+)\\s+" +
+                "(?<coldwaterbath>\\d+)\\s+" +
+                "(?<hotwaterkitchen>\\d+)\\s+" +
+                "(?<coldwaterkitchen>\\d+)\\s+" +
+                "(?<date>\\d{4}-\\d{2}-\\d{2})\\s*");
+        Matcher matcher = pattern.matcher(string);
+        if (matcher.find()) {
+            return new MonthData(
+                    Integer.parseInt(matcher.group("electricity")),
+                    Integer.parseInt(matcher.group("hotwaterbath")),
+                    Integer.parseInt(matcher.group("coldwaterbath")),
+                    Integer.parseInt(matcher.group("hotwaterkitchen")),
+                    Integer.parseInt(matcher.group("coldwaterkitchen")),
+                    LocalDate.parse(matcher.group("date")));
+        } else {
+            throw new IllegalArgumentException("matcher.find() == false at MonthData.parse() for string " + string);
+        }
     }
 }

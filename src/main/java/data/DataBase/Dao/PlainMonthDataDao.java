@@ -1,11 +1,11 @@
 package data.DataBase.Dao;
 
 import data.DataBase.Entities.MonthData;
-import org.springframework.cglib.core.Local;
 import org.springframework.lang.Nullable;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +98,7 @@ public class PlainMonthDataDao implements MonthDataDao {
                     connection.prepareStatement("select * from month_data " +
                             "where date <= '" +
                             date.toString() +
-                            "' order by date DESC offset 0 fetch next 2 rows only");
+                            "' order by date DESC LIMIT 2");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 MonthData monthData = new MonthData();
@@ -137,6 +137,48 @@ public class PlainMonthDataDao implements MonthDataDao {
             statement.execute();
         } catch (SQLException ex) {
             System.out.println("Problem executing INSERT! " + ex);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    /**
+     * Deletes all data exists for these year and month
+     *
+     * @param yearMonth - year and month
+     */
+    @Override
+    public void deleteByYearMonth(YearMonth yearMonth) {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE from month_data where " +
+                            "date_part('year', date) = " + yearMonth.getYear() + " AND " +
+                            "date_part('month', date) = " + yearMonth.getMonthValue());
+            statement.execute();
+        } catch (SQLException ex) {
+            System.out.println("Problem executing deleteByYearMonth! " + ex);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    /**
+     * Deletes a row with the specified date
+     *
+     * @param date - row with this exact date will be deleted
+     */
+    @Override
+    public void deleteByDate(LocalDate date) {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE from month_data where date = '" + date.toString() + "'");
+            statement.execute();
+        } catch (SQLException ex) {
+            System.out.println("Problem executing deleteByDate! " + ex);
         } finally {
             closeConnection(connection);
         }

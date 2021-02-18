@@ -63,7 +63,7 @@ public class PlainTariffDao implements TariffDao {
             PreparedStatement statement =
                     connection.prepareStatement("select * from tariffs where update_date <= '" +
                             date.toString() +
-                    "' order by update_date DESC");
+                            "' order by update_date DESC");
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 result.setColdWater(resultSet.getFloat("cold_water"));

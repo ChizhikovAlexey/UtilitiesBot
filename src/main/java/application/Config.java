@@ -1,8 +1,11 @@
 package application;
 
 import bot.TelegramBot;
+import bot.commands.DeleteByYearMonth;
+import bot.commands.InsertMonthData;
 import bot.commands.LastReport;
 import bot.commands.Start;
+import bot.usersdata.Chats;
 import data.DataBase.Dao.MonthDataDao;
 import data.DataBase.Dao.PlainMonthDataDao;
 import data.DataBase.Dao.PlainTariffDao;
@@ -35,16 +38,29 @@ public class Config {
                                    @Qualifier("PlainTariffDao") TariffDao tariffDao) {
         return new DataManager(monthDataDao, tariffDao);
     }
+
+    @Bean("Chats")
+    public Chats chats() {
+        return new Chats();
+    }
+
     @Bean("ListOfCommands")
-    public ArrayList<BotCommand> listOfCommands(@Qualifier("DataManager") DataManager dataManager) {
+    public ArrayList<BotCommand> listOfCommands(@Qualifier("Chats") Chats chats,
+                                                @Qualifier("DataManager") DataManager dataManager) {
         ArrayList<BotCommand> commands = new ArrayList<>();
-        commands.add(new Start("start", "Начало работы с ботом"));
-        commands.add(new LastReport("last_report", "Сгенерировать последний доступный отчёт", dataManager));
+        commands.add(new Start("start", "Начало работы с ботом", chats));
+        commands.add(new LastReport("last_report", "Сгенерировать последний доступный отчёт", chats, dataManager));
+        commands.add(new DeleteByYearMonth("delete_by_year_month",
+                "Удалить информацию о каком-то месяце", chats));
+        commands.add(new InsertMonthData("insert_month_data",
+                "Ввести новые показания", chats));
         return commands;
     }
 
     @Bean("TelegramBot")
-    public TelegramBot telegramBot(@Qualifier("ListOfCommands") List<BotCommand> listOfCommands) {
-        return new TelegramBot(listOfCommands);
+    public TelegramBot telegramBot(@Qualifier("ListOfCommands") List<BotCommand> listOfCommands,
+                                   @Qualifier("Chats") Chats chats,
+                                   @Qualifier("DataManager") DataManager dataManager) {
+        return new TelegramBot(listOfCommands, dataManager, chats);
     }
 }

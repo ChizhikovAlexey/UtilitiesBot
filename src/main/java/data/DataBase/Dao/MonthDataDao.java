@@ -4,6 +4,7 @@ import data.DataBase.Entities.MonthData;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 public interface MonthDataDao {
@@ -15,4 +16,8 @@ public interface MonthDataDao {
     List<MonthData> findActualAndPreviousMonthsByDate(LocalDate date);
 
     void insert(MonthData monthData);
+
+    void deleteByDate(LocalDate date);
+
+    void deleteByYearMonth(YearMonth yearMonth);
 }
