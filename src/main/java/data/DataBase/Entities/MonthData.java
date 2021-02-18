@@ -1,6 +1,6 @@
 package data.DataBase.Entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Entity that represents meters data for a month
@@ -15,9 +15,9 @@ public class MonthData {
     public MonthData() {
     }
 
-    private Date date;
+    private LocalDate date;
 
-    public MonthData(int electricity, int hotWaterBath, int coldWaterBath, int hotWaterKitchen, int coldWaterKitchen, Date date) {
+    public MonthData(int electricity, int hotWaterBath, int coldWaterBath, int hotWaterKitchen, int coldWaterKitchen, LocalDate date) {
         this.coldWaterBath = coldWaterBath;
         this.hotWaterBath = hotWaterBath;
         this.coldWaterKitchen = coldWaterKitchen;
@@ -66,11 +66,11 @@ public class MonthData {
         this.electricity = electricity;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -1,10 +1,11 @@
 package data.DataBase.Dao;
 
 import data.DataBase.Entities.MonthData;
+import org.springframework.cglib.core.Local;
 import org.springframework.lang.Nullable;
 
 import java.sql.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class PlainMonthDataDao implements MonthDataDao {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 MonthData monthData = new MonthData();
-                monthData.setDate(resultSet.getDate("date"));
+                monthData.setDate(resultSet.getDate("date").toLocalDate());
                 monthData.setHotWaterBath(resultSet.getInt("hot_water_bath"));
                 monthData.setColdWaterBath(resultSet.getInt("cold_water_bath"));
                 monthData.setHotWaterKitchen(resultSet.getInt("hot_water_kitchen"));
@@ -57,19 +58,19 @@ public class PlainMonthDataDao implements MonthDataDao {
 
     @Override
     @Nullable
-    public MonthData findByDate(Date date) {
+    public MonthData findByDate(LocalDate date) {
         MonthData result = new MonthData();
         Connection connection = null;
         try {
             connection = getConnection();
             PreparedStatement statement =
                     connection.prepareStatement("select * from month_data" +
-                            " where date_part('year', date) = " + (1900 + date.getYear()) +
-                            " AND date_part('month', date) = " + (1 + date.getMonth()) +
+                            " where date_part('year', date) = " + date.getYear() +
+                            " AND date_part('month', date) = " + date.getMonthValue() +
                             " order by date ASC");
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                result.setDate(resultSet.getDate("date"));
+                result.setDate(resultSet.getDate("date").toLocalDate());
                 result.setHotWaterBath(resultSet.getInt("hot_water_bath"));
                 result.setColdWaterBath(resultSet.getInt("cold_water_bath"));
                 result.setHotWaterKitchen(resultSet.getInt("hot_water_kitchen"));
@@ -88,7 +89,7 @@ public class PlainMonthDataDao implements MonthDataDao {
     }
 
     @Override
-    public List<MonthData> findActualAndPreviousMonthsByDate(Date date) {
+    public List<MonthData> findActualAndPreviousMonthsByDate(LocalDate date) {
         List<MonthData> result = new ArrayList<>();
         Connection connection = null;
         try {
@@ -101,7 +102,7 @@ public class PlainMonthDataDao implements MonthDataDao {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 MonthData monthData = new MonthData();
-                monthData.setDate(resultSet.getDate("date"));
+                monthData.setDate(resultSet.getDate("date").toLocalDate());
                 monthData.setHotWaterBath(resultSet.getInt("hot_water_bath"));
                 monthData.setColdWaterBath(resultSet.getInt("cold_water_bath"));
                 monthData.setHotWaterKitchen(resultSet.getInt("hot_water_kitchen"));
@@ -132,7 +133,7 @@ public class PlainMonthDataDao implements MonthDataDao {
             statement.setInt(3, monthData.getColdWaterBath());
             statement.setInt(4, monthData.getHotWaterKitchen());
             statement.setInt(5, monthData.getColdWaterKitchen());
-            statement.setDate(6, (java.sql.Date) monthData.getDate());
+            statement.setDate(6, Date.valueOf(monthData.getDate()));
             statement.execute();
         } catch (SQLException ex) {
             System.out.println("Problem executing INSERT! " + ex);

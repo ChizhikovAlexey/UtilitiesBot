@@ -6,7 +6,7 @@ import data.DataBase.Entities.MonthData;
 import data.DataBase.Entities.Tariff;
 import org.springframework.lang.Nullable;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class DataManager {
@@ -20,7 +20,7 @@ public class DataManager {
     }
 
     @Nullable
-    public TextReport getReportByDate(Date date) {
+    public TextReport getReportByDate(LocalDate date) {
         List<MonthData> list = monthDataDao.findActualAndPreviousMonthsByDate(date);
         MonthData previousMonth = list.get(1);
         MonthData actualMonth = list.get(0);

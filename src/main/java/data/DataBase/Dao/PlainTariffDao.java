@@ -4,7 +4,7 @@ import data.DataBase.Entities.Tariff;
 import org.springframework.lang.Nullable;
 
 import java.sql.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class PlainTariffDao implements TariffDao {
 
     @Override
     @Nullable
-    public Tariff findByDate(Date date) {
+    public Tariff findByDate(LocalDate date) {
         Tariff result = new Tariff();
         Connection connection = null;
         try {

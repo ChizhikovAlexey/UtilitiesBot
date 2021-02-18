@@ -3,7 +3,7 @@ package data;
 import data.DataBase.Entities.MonthData;
 import data.DataBase.Entities.Tariff;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class TextReport {
     private final MonthData actualMonth;
@@ -20,8 +20,8 @@ public class TextReport {
     private final int coldWater;
     private final int hotWater;
 
-    private final Date actualDate;
-    private final Date previousDate;
+    private final LocalDate actualDate;
+    private final LocalDate previousDate;
 
     private final Tariff tariff;
 
@@ -103,11 +103,11 @@ public class TextReport {
         return hotWater;
     }
 
-    public Date getActualDate() {
+    public LocalDate getActualDate() {
         return actualDate;
     }
 
-    public Date getPreviousDate() {
+    public LocalDate getPreviousDate() {
         return previousDate;
     }
 
