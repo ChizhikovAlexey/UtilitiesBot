@@ -1,7 +1,7 @@
-package DataManagement;
+package data;
 
-import DataManagement.DataBase.Entities.MonthData;
-import DataManagement.DataBase.Entities.Tariff;
+import data.DataBase.Entities.MonthData;
+import data.DataBase.Entities.Tariff;
 
 import java.util.Date;
 

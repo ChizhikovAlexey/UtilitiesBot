@@ -1,6 +1,6 @@
-package DataManagement.DataBase.Dao;
+package data.DataBase.Dao;
 
-import DataManagement.DataBase.Entities.Tariff;
+import data.DataBase.Entities.Tariff;
 import org.springframework.lang.Nullable;
 
 import java.sql.*;

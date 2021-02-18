@@ -1,4 +1,4 @@
-package DataManagement.DataBase.Entities;
+package data.DataBase.Entities;
 
 import java.util.Date;
 

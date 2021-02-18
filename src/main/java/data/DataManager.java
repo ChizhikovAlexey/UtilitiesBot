@@ -1,9 +1,9 @@
-package DataManagement;
+package data;
 
-import DataManagement.DataBase.Dao.MonthDataDao;
-import DataManagement.DataBase.Dao.TariffDao;
-import DataManagement.DataBase.Entities.MonthData;
-import DataManagement.DataBase.Entities.Tariff;
+import data.DataBase.Dao.MonthDataDao;
+import data.DataBase.Dao.TariffDao;
+import data.DataBase.Entities.MonthData;
+import data.DataBase.Entities.Tariff;
 import org.springframework.lang.Nullable;
 
 import java.util.Date;

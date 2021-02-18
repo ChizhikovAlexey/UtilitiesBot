@@ -1,6 +1,6 @@
-package DataManagement.DataBase.Dao;
+package data.DataBase.Dao;
 
-import DataManagement.DataBase.Entities.MonthData;
+import data.DataBase.Entities.MonthData;
 import org.springframework.lang.Nullable;
 
 import java.util.Date;
