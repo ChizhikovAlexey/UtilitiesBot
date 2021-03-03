@@ -1,1 +1,1 @@
-web: mvn clean compile assembly:single; java -jar target/UtilitiesBot-jar-with-dependencies.jar
+web: java -jar target/UtilitiesBot-jar-with-dependencies.jar
