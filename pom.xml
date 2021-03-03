@@ -23,6 +23,12 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <finalName>UtilitiesBot</finalName>
+                    <archive>
+                        <manifest>
+                            <mainClass>application.ApplicationStarter</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
@@ -100,8 +106,6 @@
             <artifactId>maven-assembly-plugin</artifactId>
             <version>3.3.0</version>
         </dependency>
-
-
 
     </dependencies>
 

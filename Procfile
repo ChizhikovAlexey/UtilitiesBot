@@ -1,1 +1,1 @@
-web: java -jar target/UtilitiesBot-0.1.jar
+web: java -jar target/UtilitiesBot-jar-with-dependencies.jar
