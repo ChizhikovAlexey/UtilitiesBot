@@ -35,7 +35,7 @@ public class TextReport {
     private final float coldWaterPrice;
     private final float hotWaterPrice;
 
-    private final float overallPrive;
+    private final float overallPrice;
 
 
     public TextReport(MonthData previousMonth, MonthData actualMonth, Tariff tariff) {
@@ -65,7 +65,7 @@ public class TextReport {
         hotWaterPrice = hotWater * tariff.getHotWater();
         coldWaterPrice = coldWater * tariff.getColdWater();
 
-        overallPrive = coldWaterPrice + hotWaterPrice + drainagePrice + electricityPrice;
+        overallPrice = coldWaterPrice + hotWaterPrice + drainagePrice + electricityPrice;
 
         actualDate = actualMonth.getDate();
         previousDate = previousMonth.getDate();
@@ -146,6 +146,6 @@ public class TextReport {
                 "Горячая вода: " + hotWaterPrice + "р. (расход: " + hotWater + ");\n" +
                 "Холодная вода: " + coldWaterPrice + "р. (расход: " + coldWater + ");\n" +
                 "Водоотведение: " + drainagePrice + ";\n" +
-                "ИТОГО: " + overallPrive + "р.\n";
+                "ИТОГО: " + overallPrice + "р.\n";
     }
 }

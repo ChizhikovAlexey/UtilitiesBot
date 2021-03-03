@@ -13,7 +13,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 public class TelegramBot extends TelegramLongPollingCommandBot {

@@ -23,9 +23,12 @@ public class ApplicationTests {
     @Test
     void monthDataParseTest() {
         LocalDate now = LocalDate.now();
-        MonthData monthData = MonthData.parse("43500 460 518 112 178 " + now.toString());
+        MonthData monthData = MonthData.parse("43500    460    518    112   178 " + now.toString());
         assert monthData.getDate().equals(now);
         assert monthData.getElectricity() == 43500;
         assert monthData.getHotWaterBath() == 460;
+        assert monthData.getColdWaterBath() == 518;
+        assert monthData.getHotWaterKitchen() == 112;
+        assert monthData.getColdWaterKitchen() == 178;
     }
 }
