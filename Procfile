@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/UtilitiesBot-jar-with-dependencies.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/UtilitiesBot-jar-with-dependencies.jar
