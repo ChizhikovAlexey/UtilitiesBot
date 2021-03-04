@@ -1,9 +1,7 @@
 package data.ods;
 
-import com.github.miachm.sods.Borders;
 import com.github.miachm.sods.Sheet;
 import com.github.miachm.sods.SpreadSheet;
-import com.github.miachm.sods.Style;
 import data.DataBase.Entities.MonthData;
 import data.DataBase.Entities.Tariff;
 import data.DataManager;
