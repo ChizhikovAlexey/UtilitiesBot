@@ -9,14 +9,6 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class ApplicationStarter {
     public static void main(String[] args) {
-
-        System.out.println("I'm ALIVE!");
-        System.out.println("I'm ALIVE!");
-        System.out.println("I'm ALIVE!");
-        System.out.println("I'm ALIVE!");
-        System.out.println("I'm ALIVE!");
-        System.out.println("I'm ALIVE!");
-
         GenericApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
         TelegramBot telegramBot = (TelegramBot) ctx.getBean("TelegramBot");
         try {

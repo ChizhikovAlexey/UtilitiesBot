@@ -19,11 +19,7 @@ public class CreateOds extends AbstractCommand{
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
-        System.out.println("BEGINNING OF CreateOds execute()");
-        System.out.println("STARTING CREATING FILE");
         File file = odsManager.getOds();
-        System.out.println("FILE CREATED! SENDING!");
         sendFile(absSender, chat, getCommandIdentifier(), file);
-        System.out.println("ENDING OF CreateOds execute()");
     }
 }
