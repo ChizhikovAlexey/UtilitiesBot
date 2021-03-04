@@ -19,8 +19,12 @@ import java.util.List;
 public class TelegramBot extends TelegramLongPollingCommandBot {
     private final Chats chats;
     private final DataManager dataManager;
+    private final String username;
+    private final String token;
 
-    public TelegramBot(List<BotCommand> listOfCommands, DataManager dataManager, Chats chats) {
+    public TelegramBot(String username, String token, List<BotCommand> listOfCommands, DataManager dataManager, Chats chats) {
+        this.username = username;
+        this.token= token;
         this.chats = chats;
         this.dataManager = dataManager;
         listOfCommands.forEach(this::register);
@@ -28,12 +32,12 @@ public class TelegramBot extends TelegramLongPollingCommandBot {
 
     @Override
     public String getBotUsername() {
-        return "Utilities23Bot";
+        return username;
     }
 
     @Override
     public String getBotToken() {
-        return "1645730581:AAFixGW_3bZjaEdKwM5C3rhXNixeKMgAAco";
+        return token;
     }
 
     @Override

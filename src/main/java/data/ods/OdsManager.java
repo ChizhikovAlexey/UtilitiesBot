@@ -119,8 +119,6 @@ public class OdsManager {
         } catch (Exception e) {
             System.out.println("Error while creating .ods!\n" + e);
         }
-
-        System.out.println(result);
         return result;
     }
 }

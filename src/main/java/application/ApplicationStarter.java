@@ -1,6 +1,7 @@
 package application;
 
 import bot.TelegramBot;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -17,7 +18,6 @@ public class ApplicationStarter {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-
         ctx.close();
     }
 }

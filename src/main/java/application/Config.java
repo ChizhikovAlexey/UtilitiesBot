@@ -9,6 +9,7 @@ import data.DataBase.Dao.PlainTariffDao;
 import data.DataBase.Dao.TariffDao;
 import data.DataManager;
 import data.ods.OdsManager;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,6 +68,12 @@ public class Config {
     public TelegramBot telegramBot(@Qualifier("ListOfCommands") List<BotCommand> listOfCommands,
                                    @Qualifier("Chats") Chats chats,
                                    @Qualifier("DataManager") DataManager dataManager) {
-        return new TelegramBot(listOfCommands, dataManager, chats);
+        Dotenv dotenv = Dotenv.load();
+        return new TelegramBot(
+                dotenv.get("BotUsername"),
+                dotenv.get("BotToken"),
+                listOfCommands,
+                dataManager,
+                chats);
     }
 }
