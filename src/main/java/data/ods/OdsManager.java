@@ -115,11 +115,12 @@ public class OdsManager {
 
             SpreadSheet spread = new SpreadSheet();
             spread.appendSheet(sheet);
-
             spread.save(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println(result);
         return result;
     }
 }
