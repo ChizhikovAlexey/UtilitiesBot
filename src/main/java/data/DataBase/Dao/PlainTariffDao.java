@@ -10,9 +10,13 @@ import java.util.List;
 
 public class PlainTariffDao implements TariffDao {
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/utilities_data",
-                "postgres", "");
+        String DATABASE_URL = System.getenv("JDBC_DATABASE_URL");
+        if (DATABASE_URL == null){
+            DATABASE_URL = "jdbc:postgresql://localhost:5432/utilities_data";
+            return DriverManager.getConnection(DATABASE_URL, "postgres", "");
+        } else {
+            return DriverManager.getConnection(DATABASE_URL);
+        }
     }
 
     private void closeConnection(Connection connection) {
