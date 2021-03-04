@@ -28,6 +28,7 @@ public class OdsManager {
             sheet.setColumnWidths(1, 6, 28.0);
 
             for (int i = 1; i < list.size(); i++) {
+                System.out.println("Handling row number " + i);
                 int firstRow = (i - 1) * 9;
 
                 MonthData newMonth = list.get(i);
