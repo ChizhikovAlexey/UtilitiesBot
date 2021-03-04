@@ -20,7 +20,6 @@ public class OdsManager {
     public File getOds() {
         List<MonthData> list = dataManager.getAllMonths();
         File result = new File("utilities.ods");
-        assert (result.exists());
         try {
             int rows = 9 * list.size();
             int columns = 7;
@@ -118,7 +117,7 @@ public class OdsManager {
             spread.appendSheet(sheet);
             spread.save(result);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error while creating .ods!\n" + e);
         }
 
         System.out.println(result);
