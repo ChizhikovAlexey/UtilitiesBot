@@ -68,10 +68,9 @@ public class Config {
     public TelegramBot telegramBot(@Qualifier("ListOfCommands") List<BotCommand> listOfCommands,
                                    @Qualifier("Chats") Chats chats,
                                    @Qualifier("DataManager") DataManager dataManager) {
-        Dotenv dotenv = Dotenv.load();
         return new TelegramBot(
-                dotenv.get("BotUsername"),
-                dotenv.get("BotToken"),
+                System.getProperty("BotUsername"),
+                System.getProperty("BotToken"),
                 listOfCommands,
                 dataManager,
                 chats);
