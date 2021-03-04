@@ -8,6 +8,7 @@ import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.Date;
 import java.util.List;
 
 public class DataManager {
@@ -47,4 +48,29 @@ public class DataManager {
         monthDataDao.deleteByYearMonth(yearMonth);
     }
 
+    public List<MonthData> getAllMonths() {
+        return monthDataDao.findAll();
+    }
+
+    public TextReport getReportByYearMonth(YearMonth yearMonth) {
+        List<MonthData> list = monthDataDao.findActualAndPreviousMonthsByYearMonth(yearMonth);
+        MonthData previousMonth = list.get(1);
+        MonthData actualMonth = list.get(0);
+
+        if (previousMonth == null || actualMonth == null) {
+            return null;
+        }
+
+        Tariff tariff = tariffDao.findByDate(actualMonth.getDate());
+
+        if (tariff == null) {
+            return null;
+        }
+
+        return new TextReport(previousMonth, actualMonth, tariff);
+    }
+
+    public Tariff getTariffByDate(LocalDate date) {
+        return tariffDao.findByDate(date);
+    }
 }

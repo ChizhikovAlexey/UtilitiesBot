@@ -4,6 +4,7 @@ import bot.usersdata.BotState;
 import bot.usersdata.Chats;
 import data.DataBase.Entities.MonthData;
 import data.DataManager;
+import data.TextReport;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -47,6 +48,15 @@ public class TelegramBot extends TelegramLongPollingCommandBot {
                 try {
                     dataManager.deleteDataByYearMonth(YearMonth.parse(message.getText()));
                     sendMessage("Готово!", chatId);
+                } catch (DateTimeParseException exc) {
+                    sendMessage("Error parsing YearMonth!", chatId);
+                }
+            }
+            case GET_BY_MONTH -> {
+                chats.updateState(chatId, BotState.MAIN);
+                try {
+                    TextReport report = dataManager.getReportByYearMonth(YearMonth.parse(message.getText()));
+                    sendMessage(report.toString(), chatId);
                 } catch (DateTimeParseException exc) {
                     sendMessage("Error parsing YearMonth!", chatId);
                 }

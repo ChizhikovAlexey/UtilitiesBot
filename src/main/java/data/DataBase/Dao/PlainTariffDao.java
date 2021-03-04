@@ -45,7 +45,7 @@ public class PlainTariffDao implements TariffDao {
                 tariff.setHotWater(resultSet.getFloat("hot_water"));
                 tariff.setElectricity(resultSet.getFloat("electricity"));
                 tariff.setDrainage(resultSet.getFloat("drainage"));
-                tariff.setUpdateDate(resultSet.getDate("update_date"));
+                tariff.setUpdateDate(resultSet.getDate("update_date").toLocalDate());
                 result.add(tariff);
             }
             statement.close();
@@ -58,7 +58,6 @@ public class PlainTariffDao implements TariffDao {
     }
 
     @Override
-    @Nullable
     public Tariff findByDate(LocalDate date) {
         Tariff result = new Tariff();
         Connection connection = null;
@@ -74,7 +73,7 @@ public class PlainTariffDao implements TariffDao {
                 result.setHotWater(resultSet.getFloat("hot_water"));
                 result.setElectricity(resultSet.getFloat("electricity"));
                 result.setDrainage(resultSet.getFloat("drainage"));
-                result.setUpdateDate(resultSet.getDate("update_date"));
+                result.setUpdateDate(resultSet.getDate("update_date").toLocalDate());
             } else {
                 return null;
             }

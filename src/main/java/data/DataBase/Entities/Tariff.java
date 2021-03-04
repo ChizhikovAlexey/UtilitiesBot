@@ -1,5 +1,6 @@
 package data.DataBase.Entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -10,7 +11,17 @@ public class Tariff {
     private float coldWater;
     private float drainage;
     private float electricity;
-    private Date updateDate;
+    private LocalDate updateDate;
+
+    public Tariff() {}
+
+    public Tariff(float electricity, float hotWater, float coldWater, float drainage,  LocalDate updateDate) {
+        this.hotWater = hotWater;
+        this.coldWater = coldWater;
+        this.drainage = drainage;
+        this.electricity = electricity;
+        this.updateDate = updateDate;
+    }
 
     public float getHotWater() {
         return hotWater;
@@ -44,11 +55,11 @@ public class Tariff {
         this.electricity = electricity;
     }
 
-    public Date getUpdateDate() {
+    public LocalDate getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
 

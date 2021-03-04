@@ -70,8 +70,39 @@ public class PlainMonthDataDao implements MonthDataDao {
             connection = getConnection();
             PreparedStatement statement =
                     connection.prepareStatement("select * from month_data" +
-                            " where date_part('year', date) = " + date.getYear() +
-                            " AND date_part('month', date) = " + date.getMonthValue() +
+                            " where date = " + date.toString() +
+                            " order by date ASC");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                result.setDate(resultSet.getDate("date").toLocalDate());
+                result.setHotWaterBath(resultSet.getInt("hot_water_bath"));
+                result.setColdWaterBath(resultSet.getInt("cold_water_bath"));
+                result.setHotWaterKitchen(resultSet.getInt("hot_water_kitchen"));
+                result.setColdWaterKitchen(resultSet.getInt("cold_water_kitchen"));
+                result.setElectricity(resultSet.getInt("electricity"));
+            } else {
+                return null;
+            }
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Problem when executing SELECT! " + ex);
+        } finally {
+            closeConnection(connection);
+        }
+        return result;
+    }
+
+    @Override
+    @Nullable
+    public MonthData findByYearMonth(YearMonth yearMonth) {
+        MonthData result = new MonthData();
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("select * from month_data" +
+                            " where date_part('year', date) = " + yearMonth.getYear() +
+                            " AND date_part('month', date) = " + yearMonth.getMonthValue() +
                             " order by date ASC");
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -103,6 +134,36 @@ public class PlainMonthDataDao implements MonthDataDao {
                     connection.prepareStatement("select * from month_data " +
                             "where date <= '" +
                             date.toString() +
+                            "' order by date DESC LIMIT 2");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                MonthData monthData = new MonthData();
+                monthData.setDate(resultSet.getDate("date").toLocalDate());
+                monthData.setHotWaterBath(resultSet.getInt("hot_water_bath"));
+                monthData.setColdWaterBath(resultSet.getInt("cold_water_bath"));
+                monthData.setHotWaterKitchen(resultSet.getInt("hot_water_kitchen"));
+                monthData.setColdWaterKitchen(resultSet.getInt("cold_water_kitchen"));
+                monthData.setElectricity(resultSet.getInt("electricity"));
+                result.add(monthData);
+            }
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Problem when executing SELECT! " + ex);
+        } finally {
+            closeConnection(connection);
+        }
+        return result;
+    }
+
+    @Override
+    public List<MonthData> findActualAndPreviousMonthsByYearMonth(YearMonth yearMonth) {
+        List<MonthData> result = new ArrayList<>();
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("select * from month_data " +
+                            "where date <= '" + yearMonth.atEndOfMonth() +
                             "' order by date DESC LIMIT 2");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

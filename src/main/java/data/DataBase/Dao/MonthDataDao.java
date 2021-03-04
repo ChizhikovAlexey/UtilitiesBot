@@ -15,9 +15,14 @@ public interface MonthDataDao {
 
     List<MonthData> findActualAndPreviousMonthsByDate(LocalDate date);
 
+    List<MonthData> findActualAndPreviousMonthsByYearMonth(YearMonth yearMonth);
+
     void insert(MonthData monthData);
 
     void deleteByDate(LocalDate date);
 
     void deleteByYearMonth(YearMonth yearMonth);
+
+    @Nullable
+    MonthData findByYearMonth(YearMonth yearMonth);
 }

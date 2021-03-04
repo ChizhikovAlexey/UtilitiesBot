@@ -9,6 +9,5 @@ import java.util.List;
 public interface TariffDao {
     List<Tariff> findAll();
 
-    @Nullable
     Tariff findByDate(LocalDate date);
 }
