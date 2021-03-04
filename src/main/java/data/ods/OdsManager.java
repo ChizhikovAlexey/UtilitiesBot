@@ -34,6 +34,7 @@ public class OdsManager {
                 MonthData newMonth = list.get(i);
                 MonthData previousMonth = list.get(i - 1);
                 Tariff tariff = dataManager.getTariffByDate(newMonth.getDate());
+                System.out.println(tariff);
 
                 sheet.setRowHeight(firstRow + 7, 7.5);
                 sheet.getRange(firstRow + 1, 5, 7, 1).setStyle(Styles.getPriceStyle());
@@ -112,12 +113,14 @@ public class OdsManager {
                         "дата показаний",
                         newMonth.getDate()
                 );
+
+                System.out.println("Row " + 1 + " finished!");
             }
 
             SpreadSheet spread = new SpreadSheet();
             spread.appendSheet(sheet);
             spread.save(result);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Error while creating .ods!\n" + e);
         }
 
