@@ -20,6 +20,7 @@ public class OdsManager {
     public File getOds() {
         List<MonthData> list = dataManager.getAllMonths();
         File result = new File("utilities.ods");
+        assert (result.exists());
         try {
             int rows = 9 * list.size();
             int columns = 7;
