@@ -1,13 +1,11 @@
 # UtilitiesBot
-Telegram Bot that is used by me to store and process utilities data (electricity and water meters). Planning to deploy it on Heroku and use the bot every month.
 
-## Using:
- * Spring Framework (not Boot in order to get into everything)
- * TelegramBots Library (you can find it on GitHub)
- * PostgreSQL DB
- * Maven
- * JUnit
- 
-## TODO:
- * ORM
- * DB <-> .ods automatic conversion (I just need this irl)
+Bot is used to manage utilities data from my appartment. Deployed on Heroku.
+Supports inserting and deleting rows via Telegram, also supports converting stored data to a .ods file with special format.
+
+## Uses:
+* Spring Framework (not Boot: more fun)
+* TelegramBots Library
+* PostgreSQL
+* Maven
+* JUnit
