@@ -26,7 +26,7 @@
                     <finalName>UtilitiesBot</finalName>
                     <archive>
                         <manifest>
-                            <mainClass>application.ApplicationStarter</mainClass>
+                            <mainClass>chizhikov.utilitiesbot.application.ApplicationStarter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -129,7 +129,12 @@
             <version>2.2.0</version>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.30.Final</version>
+        </dependency>
     </dependencies>
 
 </project>
