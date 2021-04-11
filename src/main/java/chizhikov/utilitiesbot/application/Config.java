@@ -1,11 +1,11 @@
 package chizhikov.utilitiesbot.application;
 
-import chizhikov.utilitiesbot.bot.commands.*;
 import chizhikov.utilitiesbot.bot.TelegramBot;
 import chizhikov.utilitiesbot.bot.commands.*;
 import chizhikov.utilitiesbot.bot.usersdata.Chats;
 import chizhikov.utilitiesbot.data.DataManager;
 import chizhikov.utilitiesbot.data.ods.OdsManager;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,31 +18,13 @@ import java.util.List;
 @Configuration
 @ComponentScan("chizhikov.utilitiesbot")
 public class Config {
-//    @Bean("PlainMonthDataDao")
-//    public MonthDataDao monthDataDao() {
-//        return new PlainMonthDataDao();
-//    }
-//
-//    @Bean("PlainTariffDao")
-//    public TariffDao tariffDao() {
-//        return new PlainTariffDao();
-//    }
-
-//    @Bean("DataManager")
-//    public DataManager dataManager(@Qualifier("PlainMonthDataDao") MonthDataDao monthDataDao,
-//                                   @Qualifier("PlainTariffDao") TariffDao tariffDao) {
-//        return new DataManager(monthDataDao, tariffDao);
-//    }
-
-//    @Bean("OdsManager")
-//    public OdsManager odsManager(DataManager dataManager) {
-//        return new OdsManager(dataManager);
-//    }
-
-//    @Bean("Chats")
-//    public Chats chats() {
-//        return new Chats();
-//    }
+    @Bean("HibernateSessionFactory")
+    public SessionFactory sessionFactory() {
+        return new org.hibernate.cfg.Configuration().
+                setProperty("hibernate.connection.url", System.getProperty("DATABASE_URL")).
+                configure("hibernate.cfg.xml").
+                buildSessionFactory();
+    }
 
     @Bean("ListOfCommands")
     public ArrayList<BotCommand> listOfCommands(Chats chats,

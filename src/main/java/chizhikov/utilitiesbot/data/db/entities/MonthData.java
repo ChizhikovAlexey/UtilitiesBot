@@ -13,11 +13,10 @@ public class MonthData {
     private int coldWaterBath;
     private int hotWaterKitchen;
     private int coldWaterKitchen;
+    private LocalDate date;
 
     public MonthData() {
     }
-
-    private LocalDate date;
 
     public MonthData(int electricity, int hotWaterBath, int coldWaterBath, int hotWaterKitchen, int coldWaterKitchen, LocalDate date) {
         this.coldWaterBath = coldWaterBath;

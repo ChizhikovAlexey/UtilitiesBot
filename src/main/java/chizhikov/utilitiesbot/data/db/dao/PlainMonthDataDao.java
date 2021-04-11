@@ -10,7 +10,7 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component("PlainMonthDao")
+//@Component("PlainMonthDao")
 public class PlainMonthDataDao implements MonthDataDao {
 
     private Connection getConnection() throws SQLException {
