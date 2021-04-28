@@ -6,7 +6,6 @@ import chizhikov.utilitiesbot.bot.usersdata.Chats;
 import chizhikov.utilitiesbot.data.DataManager;
 import chizhikov.utilitiesbot.data.ods.OdsManager;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -45,9 +44,9 @@ public class Config {
     }
 
     @Bean("TelegramBot")
-    public TelegramBot telegramBot(@Qualifier("ListOfCommands") List<BotCommand> listOfCommands,
-                                   @Qualifier("Chats") Chats chats,
-                                   @Qualifier("DataManager") DataManager dataManager) {
+    public TelegramBot telegramBot(List<BotCommand> listOfCommands,
+                                   Chats chats,
+                                   DataManager dataManager) {
         return new TelegramBot(
                 System.getProperty("BotUsername"),
                 System.getProperty("BotToken"),
