@@ -19,7 +19,6 @@ public class ApplicationStarter {
     public static void main(String[] args) {
         Dotenv.configure().ignoreIfMissing().systemProperties().load();
         GenericApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
-        DataManager dataManager = (DataManager) ctx.getBean("DataManager");
         TelegramBot telegramBot = (TelegramBot) ctx.getBean("TelegramBot");
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
