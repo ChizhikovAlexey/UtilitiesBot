@@ -17,18 +17,15 @@ import java.time.YearMonth;
 
 public class ApplicationStarter {
     public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().systemProperties().load();
-        System.out.println(System.getProperty("DATABASE_URL"));
+        Dotenv.configure().ignoreIfMissing().systemProperties().load();
         GenericApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
+        DataManager dataManager = (DataManager) ctx.getBean("DataManager");
         TelegramBot telegramBot = (TelegramBot) ctx.getBean("TelegramBot");
-        HibernateMonthDataDao dao = (HibernateMonthDataDao) ctx.getBean(HibernateMonthDataDao.class);
-        System.out.println(dao.findActualAndPreviousMonthsByYearMonth(YearMonth.now()));
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(telegramBot);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-        ctx.close();
     }
 }

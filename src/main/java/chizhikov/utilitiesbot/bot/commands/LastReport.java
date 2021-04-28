@@ -11,8 +11,6 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 import java.time.LocalDate;
 
 public class LastReport extends DataCommand {
-
-
     public LastReport(String commandIdentifier, String description, Chats chats, DataManager dataManager) {
         super(commandIdentifier, description, chats, dataManager);
     }
