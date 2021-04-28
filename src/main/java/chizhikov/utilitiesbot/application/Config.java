@@ -20,7 +20,7 @@ public class Config {
     @Bean("HibernateSessionFactory")
     public SessionFactory sessionFactory() {
         return new org.hibernate.cfg.Configuration().
-                setProperty("hibernate.connection.url", System.getProperty("DATABASE_URL")).
+                setProperty("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL")).
                 configure("hibernate.cfg.xml").
                 buildSessionFactory();
     }
