@@ -19,7 +19,8 @@ public class ApplicationStarter {
     public static void main(String[] args) {
         System.getenv().forEach(System::setProperty);
         Dotenv.configure().ignoreIfMissing().systemProperties().load();
-        System.out.println(System.getProperty("DATABASE_URL"));
+        System.out.println(System.getProperty("JDBC_DATABASE_USERNAME"));
+        System.out.println(System.getProperty("JDBC_DATABASE_PASSWORD"));
         GenericApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
         TelegramBot telegramBot = (TelegramBot) ctx.getBean("TelegramBot");
         try {
